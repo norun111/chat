@@ -5,12 +5,15 @@
         .top-items__name
           = current_user.name
         .top-items__icons
-          = link_to "#", class:"top-items__icons--edit"  do
+          = link_to new_group_path, class:"top-items__icons--edit"  do
             = icon('fas','edit')
           = link_to edit_user_path(current_user) do
             = icon('fas', 'cog', class: 'icon')
     .side-bar__user-list
-      .side-bar__user-list-group-name
-        techexpert
-      .side-bar__user-list-message
-        nothing
+      - current_user.groups.each do |group|
+        .group
+          = link_to group_messages_path(group) do
+            .side-bar__user-list-group-name
+              = group.name
+            .side-bar__user-list-message
+              nothing
